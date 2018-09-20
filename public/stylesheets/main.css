@@ -14,3 +14,13 @@
 .delete-form {
     display: inline
 }
+
+.loginSignuph1 {
+    text-align: center;
+    color: #1567af;
+}
+
+.loginSignupContainer {
+    width: 30%;
+    margin: 25px auto;
+}
