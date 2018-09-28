@@ -54,6 +54,10 @@ app.use('/', indexRoutes)
 app.use('/campgrounds', campgroundRoutes)
 app.use('/campgrounds/:id/comments', commentRoutes)
 
+app.use(function(req, res, next){
+    res.status(404).render('404_error_template', {title: "Sorry, page not found"});
+});
+
 
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log('yelp server started...')
