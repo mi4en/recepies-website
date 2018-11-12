@@ -68,7 +68,7 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
       req.body.campground.author = {
         id: req.user._id,
         username: req.user.username
-      }
+      };
       Campground.create(req.body.campground, function(err, campground) {
         if (err) {
           req.flash('error', err.message);
@@ -121,7 +121,7 @@ router.put("/:id",middleware.checkCampgroundOwnership, upload.single('image'), f
             if (req.file) {
               try {
                   await cloudinary.v2.uploader.destroy(campground.imageId);
-                  let result = await cloudinary.v2.uploader.upload(req.file.path);
+                  var result = await cloudinary.v2.uploader.upload(req.file.path);
                   campground.imageId = result.public_id;
                   campground.image = result.secure_url;
               } catch(err) {
