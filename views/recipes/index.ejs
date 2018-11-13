@@ -1,9 +1,8 @@
 <% include ../partials/header %> 
-    
+ <div>   
     <% if(currentUser && currentUser.isAdmin) { %>
     <h1>Admin User!</h1>
-    <% } %>
-    
+    <% } %>    
      <header class="jumbotron">
          <div class="container">
              <h1>Welcome to The Cook Grimoire!</h1>
@@ -35,4 +34,5 @@
             </div>
         <% }); %>
     </div>
+</div>
 <% include ../partials/footer %>
