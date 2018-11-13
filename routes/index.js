@@ -2,7 +2,7 @@ var express = require('express')
 var router = express.Router()
 var passport = require('passport')
 var User = require('../models/user')
-var Campground = require('../models/campground')
+var Recipe = require('../models/recipe')
 var async = require('async')
 var nodemailer = require('nodemailer')
 var crypto = require('crypto')
@@ -39,7 +39,7 @@ router.post('/register', function (req, res) {
     }
     passport.authenticate('local')(req, res, function () {
       req.flash('success', 'Welcome, ' + user.username + '!')
-      res.redirect('/campgrounds')
+      res.redirect('/recipes')
     })
   })
 })
@@ -53,7 +53,7 @@ router.get('/login', function (req, res) {
 router.post(
   '/login',
   passport.authenticate('local', {
-    successRedirect: '/campgrounds',
+    successRedirect: '/recipes',
     failureRedirect: '/login'
   }),
   function (req, res) {}
@@ -63,7 +63,7 @@ router.post(
 router.get('/logout', function (req, res) {
   req.logout()
   req.flash('success', 'Logged you out!')
-  res.redirect('/campgrounds')
+  res.redirect('/recipes')
 })
 
 // FORGOT PASSWORD
@@ -238,7 +238,7 @@ router.post('/reset/:token', function (req, res) {
         req.flash('error', 'Something went wrong please try again.')
         return res.redirect('/reset')
       }
-      res.redirect('/campgrounds')
+      res.redirect('/recipes')
     }
   )
 })
@@ -250,15 +250,15 @@ router.get('/users/:id', function (req, res) {
       req.flash('error', 'Something went wrong :(')
       res.redirect('/')
     }
-    Campground.find()
+    Recipe.find()
       .where('author.id')
       .equals(foundUser._id)
-      .exec(function (err, campgrounds) {
+      .exec(function (err, recipes) {
         if (err) {
           req.flas('error', 'Something went wrong, please try again.')
           return res.redirect('/')
         }
-        res.render('users/show', { user: foundUser, campgrounds: campgrounds })
+        res.render('users/show', { user: foundUser, recipes: recipes })
       })
   })
 })

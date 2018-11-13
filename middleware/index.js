@@ -1,19 +1,19 @@
-var Campground = require('../models/campground')
+var Recipe = require('../models/recipe')
 var Comment = require('../models/comment')
 
 // all the middleare goes here
 var middlewareObj = {}
 
-middlewareObj.checkCampgroundOwnership = function (req, res, next) {
+middlewareObj.checkRecipeOwnership = function (req, res, next) {
   if (req.isAuthenticated()) {
-    Campground.findById(req.params.id, function (err, foundCampground) {
-      if (err || !foundCampground) {
-        req.flash('error', 'Campground not found!')
+    Recipe.findById(req.params.id, function (err, foundRecipe) {
+      if (err || !foundRecipe) {
+        req.flash('error', 'Recipe not found!')
         res.redirect('back')
       } else {
-        // does user own the campground?
+        // does user own the recipe?
         if (
-          foundCampground.author.id.equals(req.user._id) ||
+          foundRecipe.author.id.equals(req.user._id) ||
           req.user.isAdmin
         ) {
           next()

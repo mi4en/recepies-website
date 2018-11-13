@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
 
 // Define schema
-var campgroundSchema = new mongoose.Schema({
+var recipeSchema = new mongoose.Schema({
   name: String,
   price: String,
   image: String,
@@ -24,4 +24,4 @@ var campgroundSchema = new mongoose.Schema({
 })
 
 // Define and export model to be used from app.js
-module.exports = mongoose.model('Campground', campgroundSchema)
+module.exports = mongoose.model('Recipe', recipeSchema)

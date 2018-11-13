@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router()
-var Campground = require('../models/campground')
+var Recipe = require('../models/recipe')
 var middleware = require('../middleware')
 var multer = require('multer')
 var storage = multer.diskStorage({
@@ -24,35 +24,35 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 })
 
-// INDEX - show all campgrounds
+// INDEX - show all recipes
 router.get('/', function (req, res) {
   if (req.query.search) {
     const regex = new RegExp(escapeRegex(req.query.search), 'gi')
-    // Get all campgrounds from DB
-    Campground.find({ name: regex }, function (err, allCampgrounds) {
+    // Get all recipes from DB
+    Recipe.find({ name: regex }, function (err, allRecipes) {
       if (err) {
         console.log(err)
       } else {
-        if (allCampgrounds.length < 1) {
+        if (allRecipes.length < 1) {
           req.flash('error', 'No results are matching your search request.')
           return res.redirect('back')
         }
-        res.render('campgrounds/index', { campgrounds: allCampgrounds })
+        res.render('recipes/index', { recipes: allRecipes })
       }
     })
   } else {
-    // Get all campgrounds from DB
-    Campground.find({}, function (err, allCampgrounds) {
+    // Get all recipes from DB
+    Recipe.find({}, function (err, allRecipes) {
       if (err) {
         console.log(err)
       } else {
-        res.render('campgrounds/index', { campgrounds: allCampgrounds })
+        res.render('recipes/index', { recipes: allRecipes })
       }
     })
   }
 })
 
-// CREATE - add new campground to DB
+// CREATE - add new recipe to DB
 router.post('/', middleware.isLoggedIn, upload.single('image'), function (
   req,
   res
@@ -62,58 +62,58 @@ router.post('/', middleware.isLoggedIn, upload.single('image'), function (
       req.flash('error', err.message)
       return res.redirect('back')
     }
-    // add cloudinary url for the image to the campground object under image property
-    req.body.campground.image = result.secure_url
-    // add image's public_id to campground object
-    req.body.campground.imageId = result.public_id
-    // add author to campground
-    req.body.campground.author = {
+    // add cloudinary url for the image to the recipe object under image property
+    req.body.recipe.image = result.secure_url
+    // add image's public_id to recipe object
+    req.body.recipe.imageId = result.public_id
+    // add author to recipe
+    req.body.recipe.author = {
       id: req.user._id,
       username: req.user.username
     }
-    Campground.create(req.body.campground, function (err, campground) {
+    Recipe.create(req.body.recipe, function (err, recipe) {
       if (err) {
         req.flash('error', err.message)
         return res.redirect('back')
       }
-      res.redirect('/campgrounds/' + campground.id)
+      res.redirect('/recipes/' + recipe.id)
     })
   })
 })
 
-// NEW - show form to create new campground
+// NEW - show form to create new recipe
 router.get('/new', middleware.isLoggedIn, function (req, res) {
-  res.render('campgrounds/new')
+  res.render('recipes/new')
 })
 
-// SHOW - shows more info about one campground
+// SHOW - shows more info about one recipe
 router.get('/:id', function (req, res) {
-  // find the campground with provided ID
-  Campground.findById(req.params.id)
+  // find the recipe with provided ID
+  Recipe.findById(req.params.id)
     .populate('comments')
-    .exec(function (err, foundCampground) {
-      if (err || !foundCampground) {
-        req.flash('error', 'Campground not found!')
+    .exec(function (err, foundRecipe) {
+      if (err || !foundRecipe) {
+        req.flash('error', 'Recipe not found!')
         res.redirect('back')
       } else {
-        // console.log(foundCampground)
-        // render show template with that campground
-        res.render('campgrounds/show', { campground: foundCampground })
+        // console.log(foundRecipe)
+        // render show template with that recipe
+        res.render('recipes/show', { recipe: foundRecipe })
       }
     })
 })
 
 // EDIT CAMPGROUND ROUTE
-router.get('/:id/edit', middleware.checkCampgroundOwnership, function (
+router.get('/:id/edit', middleware.checkRecipeOwnership, function (
   req,
   res
 ) {
-  Campground.findById(req.params.id, function (err, foundCampground) {
+  Recipe.findById(req.params.id, function (err, foundRecipe) {
     if (err) {
       console.log(err)
     } else {
-      // render show template with that campground
-      res.render('campgrounds/edit', { campground: foundCampground })
+      // render show template with that recipe
+      res.render('recipes/edit', { recipe: foundRecipe })
     }
   })
 })
@@ -121,47 +121,47 @@ router.get('/:id/edit', middleware.checkCampgroundOwnership, function (
 // UPDATE CAMPGROUND ROUTE
 router.put(
   '/:id',
-  middleware.checkCampgroundOwnership,
+  middleware.checkRecipeOwnership,
   upload.single('image'),
   function (req, res) {
-    Campground.findById(req.params.id, async function (err, campground) {
+    Recipe.findById(req.params.id, async function (err, recipe) {
       if (err) {
         req.flash('error', err.message)
         res.redirect('back')
       } else {
         if (req.file) {
           try {
-            await cloudinary.v2.uploader.destroy(campground.imageId)
+            await cloudinary.v2.uploader.destroy(recipe.imageId)
             var result = await cloudinary.v2.uploader.upload(req.file.path)
-            campground.imageId = result.public_id
-            campground.image = result.secure_url
+            recipe.imageId = result.public_id
+            recipe.image = result.secure_url
           } catch (err) {
             req.flash('error', err.message)
             return res.redirect('back')
           }
         }
-        campground.name = req.body.campground.name
-        campground.description = req.body.campground.description
-        campground.save()
+        recipe.name = req.body.recipe.name
+        recipe.description = req.body.recipe.description
+        recipe.save()
         req.flash('success', 'Successfully Updated!')
-        res.redirect('/campgrounds/' + campground._id)
+        res.redirect('/recipes/' + recipe._id)
       }
     })
   }
 )
 
 // DESTROY CAMPGROUND ROUTE
-router.delete('/:id', middleware.checkCampgroundOwnership, function (req, res) {
-  Campground.findById(req.params.id, async function (err, campground) {
+router.delete('/:id', middleware.checkRecipeOwnership, function (req, res) {
+  Recipe.findById(req.params.id, async function (err, recipe) {
     if (err) {
       req.flash('error', err.message)
       return res.redirect('back')
     }
     try {
-      await cloudinary.v2.uploader.destroy(campground.imageId)
-      campground.remove()
-      req.flash('success', 'Campground deleted successfully!')
-      res.redirect('/campgrounds')
+      await cloudinary.v2.uploader.destroy(recipe.imageId)
+      recipe.remove()
+      req.flash('success', 'Recipe deleted successfully!')
+      res.redirect('/recipes')
     } catch (err) {
       if (err) {
         req.flash('error', err.message)

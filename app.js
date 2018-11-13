@@ -7,7 +7,7 @@ var moment = require('moment')
 var passport = require('passport')
 var LocalStrategy = require('passport-local')
 var methodOverride = require('method-override')
-var Campground = require('./models/campground')
+var Recipe = require('./models/recipe')
 var Comment = require('./models/comment')
 var User = require('./models/user')
 var seedDB = require('./seeds')
@@ -15,7 +15,7 @@ var seedDB = require('./seeds')
 // requiring routes
 var commentRoutes = require('./routes/comments')
 
-var campgroundRoutes = require('./routes/campgrounds')
+var recipeRoutes = require('./routes/recipes')
 
 var indexRoutes = require('./routes/index')
 
@@ -57,8 +57,8 @@ app.use(function (req, res, next) {
 })
 
 app.use('/', indexRoutes)
-app.use('/campgrounds', campgroundRoutes)
-app.use('/campgrounds/:id/comments', commentRoutes)
+app.use('/recipes', recipeRoutes)
+app.use('/recipes/:id/comments', commentRoutes)
 
 app.use(function (req, res, next) {
   res

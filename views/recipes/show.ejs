@@ -12,31 +12,31 @@
     <div class="card mb-3">
       <img
         class="card-img-top"
-        src="<%= campground.image %>"
-        alt="<%= campground.name %>"
+        src="<%= recipe.image %>"
+        alt="<%= recipe.name %>"
       />
       <div class="card-body">
-        <p class="float-right">$<%= campground.cost %>/night</p>
-        <h5 class="card-title"><%= campground.name %></h5>
+        <p class="float-right">$<%= recipe.cost %>/night</p>
+        <h5 class="card-title"><%= recipe.name %></h5>
         <p>
           <em
             >Submitted By
-            <a href="/users/<%= campground.author.id %>"
-              ><%= campground.author.username %></a
-            >, <%= moment(campground.createdAt).fromNow() %></em
+            <a href="/users/<%= recipe.author.id %>"
+              ><%= recipe.author.username %></a
+            >, <%= moment(recipe.createdAt).fromNow() %></em
           >
         </p>
         <hr />
-        <p class="card-text"><%= campground.description %></p>
-        <% if(currentUser && campground.author.id.equals(currentUser._id) ||
+        <p class="card-text"><%= recipe.description %></p>
+        <% if(currentUser && recipe.author.id.equals(currentUser._id) ||
         currentUser && currentUser.isAdmin){ %>
         <a
           class="btn btn-outline-warning"
-          href="/campgrounds/<%= campground._id %>/edit"
+          href="/recipes/<%= recipe._id %>/edit"
           >Edit</a
         >
         <form
-          action="/campgrounds/<%= campground._id %>?_method=DELETE"
+          action="/recipes/<%= recipe._id %>?_method=DELETE"
           method="POST"
           class="delete-form"
         >
@@ -50,20 +50,20 @@
         <div class="text-right">
           <a
             class="btn btn-success"
-            href="/campgrounds/<%= campground._id %>/comments/new"
+            href="/recipes/<%= recipe._id %>/comments/new"
             >Add New Comment</a
           >
         </div>
         <hr />
         <div class="row">
-          <% campground.comments.forEach(function(comment){ %>
+          <% recipe.comments.forEach(function(comment){ %>
           <div class="col-md-12 mb-2">
             <div class="card">
               <div class="card-body">
                 <div class="float-left">
                   <p class="card-title">
-                    <a href="/users/<%= campground.author.id %>"
-                      ><%= campground.author.username %></a
+                    <a href="/users/<%= recipe.author.id %>"
+                      ><%= recipe.author.username %></a
                     >
                   </p>
                   <p class="card-text"><%= comment.text %></p>
@@ -75,13 +75,13 @@
                   || currentUser && currentUser.isAdmin){ %>
                   <div class="float-right">
                     <a
-                      href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit"
+                      href="/recipes/<%=recipe._id%>/comments/<%=comment._id%>/edit"
                       class="btn btn-sm btn-outline-warning"
                       >EDIT</a
                     >
                     <form
                       class="delete-form"
-                      action="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>?_method=DELETE"
+                      action="/recipes/<%=recipe._id%>/comments/<%=comment._id%>?_method=DELETE"
                       method="POST"
                     >
                       <button class="btn btn-sm btn-outline-danger">

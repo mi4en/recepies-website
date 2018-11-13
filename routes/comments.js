@@ -1,30 +1,30 @@
 var express = require('express')
 var router = express.Router({ mergeParams: true })
-var Campground = require('../models/campground')
+var Recipe = require('../models/recipe')
 var Comment = require('../models/comment')
 var middleware = require('../middleware')
 
 // Comments New
 router.get('/new', middleware.isLoggedIn, function (req, res) {
-  // find campground by id
+  // find recipe by id
   console.log(req.params.id)
-  Campground.findById(req.params.id, function (err, campground) {
+  Recipe.findById(req.params.id, function (err, recipe) {
     if (err) {
       console.log(err)
     } else {
-      res.render('comments/new', { campground: campground })
+      res.render('comments/new', { recipe: recipe })
     }
   })
 })
 
 // Comments Create
 router.post('/', middleware.isLoggedIn, function (req, res) {
-  // lookup campground using ID
-  Campground.findById(req.params.id, function (err, campground) {
+  // lookup recipe using ID
+  Recipe.findById(req.params.id, function (err, recipe) {
     if (err) {
       req.flash('error', 'Someting went wrong')
       console.log(err)
-      res.redirect('/campgrounds')
+      res.redirect('/recipes')
     } else {
       Comment.create(req.body.comment, function (err, comment) {
         if (err) {
@@ -35,11 +35,11 @@ router.post('/', middleware.isLoggedIn, function (req, res) {
           comment.author.username = req.user.username
           // save comment
           comment.save()
-          campground.comments.push(comment)
-          campground.save()
+          recipe.comments.push(comment)
+          recipe.save()
           console.log(comment)
           req.flash('success', 'Successfully added comment!')
-          res.redirect('/campgrounds/' + campground._id)
+          res.redirect('/recipes/' + recipe._id)
         }
       })
     }
@@ -51,9 +51,9 @@ router.get('/:comment_id/edit', middleware.checkCommentOwnership, function (
   req,
   res
 ) {
-  Campground.findById(req.params.id, function (err, foundCampground) {
-    if (err || !foundCampground) {
-      req.flash('error', 'Campground not found!')
+  Recipe.findById(req.params.id, function (err, foundRecipe) {
+    if (err || !foundRecipe) {
+      req.flash('error', 'Recipe not found!')
       return res.redirect('back')
     }
     Comment.findById(req.params.comment_id, function (err, foundComment) {
@@ -61,7 +61,7 @@ router.get('/:comment_id/edit', middleware.checkCommentOwnership, function (
         res.redirect('back')
       } else {
         res.render('comments/edit', {
-          campground_id: req.params.id,
+          recipe_id: req.params.id,
           comment: foundComment
         })
       }
@@ -81,7 +81,7 @@ router.put('/:comment_id', middleware.checkCommentOwnership, function (
     if (err) {
       res.redirect('back')
     } else {
-      res.redirect('/campgrounds/' + req.params.id)
+      res.redirect('/recipes/' + req.params.id)
     }
   })
 })
@@ -97,7 +97,7 @@ router.delete('/:comment_id', middleware.checkCommentOwnership, function (
       res.redirect('back')
     } else {
       req.flash('success', 'Comment deleted!')
-      res.redirect('/campgrounds/' + req.params.id)
+      res.redirect('/recipes/' + req.params.id)
     }
   })
 })
