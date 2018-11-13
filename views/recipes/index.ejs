@@ -3,11 +3,11 @@
     <% if(currentUser && currentUser.isAdmin) { %>
     <h1>Admin User!</h1>
     <% } %>
-    
+    <div class="container">
      <header class="jumbotron">
          <div class="container">
              <h1>Welcome to The Cook Grimoire!</h1>
-             <p>View all recipes submitted by our users!</p>
+             <p>View all the delicious witchcraft our users has shared.</p>
              <p>
                 <a class="btn btn-primary btn-large" href="/recipes/new">Add New Recipe</a>
              </p>
@@ -34,5 +34,6 @@
                 </div>
             </div>
         <% }); %>
+    </div>
     </div>
 <% include ../partials/footer %>
