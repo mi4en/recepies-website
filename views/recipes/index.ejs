@@ -1,10 +1,8 @@
-<% include ../partials/header %> 
-    
+<% include ../partials/header %>   
     <% if(currentUser && currentUser.isAdmin) { %>
     <h1>Admin User!</h1>
-    <% } %>
-    
-     <header class="jumbotron">
+    <% } %>    
+     <div class="jumbotron jumbotronStyle">
          <div class="container">
              <h1>Welcome to The Cook Grimoire!</h1>
              <p>View all recipes submitted by our users!</p>
@@ -20,7 +18,7 @@
               </form>
              </p>
          </div>
-     </header>
+        </div>
      
      <div class="row text-center">
         <% recipes.forEach(function(recipe){ %>
