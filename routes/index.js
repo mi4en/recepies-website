@@ -27,8 +27,7 @@ router.post('/register', function (req, res) {
     avatar: req.body.avatar
   })
   if (
-    req.body.adminCode === 'era&uki&mars&bela' ||
-    req.body.usename === 'administrator'
+    req.body.username === process.env.ADMIN_USER
   ) {
     newUser.isAdmin = true
   }

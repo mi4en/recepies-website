@@ -19,7 +19,7 @@ var upload = multer({ storage: storage, fileFilter: imageFilter });
 
 var cloudinary = require("cloudinary");
 cloudinary.config({
-  cloud_name: "dkgiubohc",
+  cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
