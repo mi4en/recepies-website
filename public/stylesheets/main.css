@@ -3,7 +3,8 @@ body {
   height: 100%;
 }
 .jumbotronStyle {
-  background-image: url('/assets/images.jpg')
+  background-image: url('/assets/images.jpg');
+  background-size: cover;
 }
 /*body {*/
 /*  display: -ms-flexbox;*/
