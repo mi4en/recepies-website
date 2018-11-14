@@ -71,7 +71,7 @@ router.post("/", middleware.isLoggedIn, upload.single("image"), function(
       id: req.user._id,
       username: req.user.username
     };
-    req.body.recipe.cost = result.price;
+    req.body.recipe.price = req.body.price;
     Recipe.create(req.body.recipe, function(err, recipe) {
       if (err) {
         req.flash("error", err.message);
