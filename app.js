@@ -20,7 +20,7 @@ var recipeRoutes = require('./routes/recipes')
 var indexRoutes = require('./routes/index')
 
 // exprot DATABASEURL=mongodb://conn.string...
-var url = process.env.DATABASEURL || 'mongodb://localhost:27017/yelp_camp'
+var url = process.env.DATABASEURL || 'mongodb://localhost:27017/cook_grimoire'
 mongoose.connect(
   url,
   { useNewUrlParser: true }
