@@ -6,13 +6,12 @@
   <div class="col-xs-12 col-md-6 col-lg-4">
     <form action="/recipes/<%= recipe._id %>/comments" method="POST">
       <div class="form-group">
-        <textarea
+        <input
           class="form-control"
-          rows="3"
           type="text"
           name="comment[text]"
-          placeholder="comment here"
-        ></textarea>
+          placeholder="comment text"
+        />
       </div>
       <div class="form-group">
         <button class="btn btn-lg btn-primary btn-block">Submit</button>

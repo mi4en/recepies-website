@@ -17,7 +17,7 @@ router.get("/new", middleware.isLoggedIn, function(req, res) {
   });
 });
 
-// Comments Create
+// COMMENT CREATE ROUTE
 router.post("/", middleware.isLoggedIn, function(req, res) {
   // lookup recipe using ID
   Recipe.findById(req.params.id, function(err, recipe) {
@@ -28,6 +28,7 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
     } else {
       Comment.create(req.body.comment, function(err, comment) {
         if (err) {
+          req.flash("error", "Someting went wrong");
           console.log(err);
         } else {
           // add username and id to comment
@@ -79,8 +80,10 @@ router.put("/:comment_id", middleware.checkCommentOwnership, function(
     updatedComment
   ) {
     if (err) {
+      req.flash("error", "Someting went wrong");
       res.redirect("back");
     } else {
+      req.flash("success", "Comment edited successfully!");
       res.redirect("/recipes/" + req.params.id);
     }
   });
