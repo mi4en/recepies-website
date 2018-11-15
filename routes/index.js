@@ -58,8 +58,9 @@ router.post(
 
 // LOGOUT LOGIC
 router.get("/logout", function(req, res) {
+  let loggedUser = req.body._id;
   req.logout();
-  req.flash("success", "You have successfully logged out!");
+  req.flash("success", "See you soon!");
   res.redirect("/recipes");
 });
 
