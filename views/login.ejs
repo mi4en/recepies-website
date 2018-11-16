@@ -1,11 +1,11 @@
 <% include ./partials/header %>
 <div class="row justify-content-center">
-  <div class="col-md-12 text-center">
+  <div class="col-md-12 text-center"><h1 class="h3 mb-3 font-weight-normal">Please sign in</h1></div>
+  <div class="col-xs-12 col-md-6 col-lg-4">
     <form class="form-signin" action="/login" method="POST">
       <!--
         <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
       -->
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
       <label for="inputUsername" class="sr-only">Username</label>
       <input
         type="text"
@@ -34,18 +34,18 @@
         Sign in
       </button>
     </form>
-    <div class="form-signup">
+    <div class='form-signin'>
       <p>
         Don't have an account? <a href="/register">Sing Up</a> and create one
         for free!
       </p>
       <p>
-        <a href="/forgot" class="btn btn-sm btn-outline-dark"
+        <a href="/forgot" class="btn btn-sm btn-outline-primary"
           >Forgot your password?</a
         >
       </p>
-      <p><a href="/recipes" class="btn btn-sm btn-outline-dark">Go Back</a></p>
-      <p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
+      <p><a href="/recipes" class="btn btn-sm btn-outline-primary">Go Back</a></p>
+      <p class="mt-5 mb-3 text-muted">&copy;The Cook Grimoire 2018-2019</p>
     </div>
   </div>
 </div>

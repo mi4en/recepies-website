@@ -25,31 +25,56 @@ cloudinary.config({
 });
 
 // INDEX - show all recipes
-router.get("/", function(req, res) {
-  if (req.query.search) {
-    const regex = new RegExp(escapeRegex(req.query.search), "gi");
-    // Get all recipes from DB
-    Recipe.find({ name: regex }, function(err, allRecipes) {
-      if (err) {
-        console.log(err);
-      } else {
-        if (allRecipes.length < 1) {
-          req.flash("error", "No results are matching your search request.");
-          return res.redirect("back");
-        }
-        res.render("recipes/index", { recipes: allRecipes });
-      }
-    });
-  } else {
-    // Get all recipes from DB
-    Recipe.find({}, function(err, allRecipes) {
-      if (err) {
-        console.log(err);
-      } else {
-        res.render("recipes/index", { recipes: allRecipes });
-      }
-    });
-  }
+router.get("/", function(req, res){
+    var perPage = 8;
+    var pageQuery = parseInt(req.query.page);
+    var pageNumber = pageQuery ? pageQuery : 1;
+    var noMatch = null;
+    if(req.query.search) {
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        Recipe.find({name: regex}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function (err, allRecipes) {
+            if (err) {
+              req.flash('error', err.message)
+            }
+            Recipe.count({name: regex}).exec(function (err, count) {
+                if (err) {
+                    console.log(err);
+                    res.redirect("back");
+                } else {
+                    if(allRecipes.length < 1) {
+                        noMatch = "No recipes match your search, please try again.";
+                    }
+                    res.render("recipes/index", {
+                        recipes: allRecipes,
+                        current: pageNumber,
+                        pages: Math.ceil(count / perPage),
+                        noMatch: noMatch,
+                        search: req.query.search
+                    });
+                }
+            });
+        });
+    } else {
+        // get all recipes from DB
+        Recipe.find({}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function (err, allRecipes) {
+            if (err) {
+              req.flash('error', err.message)
+            }
+            Recipe.count().exec(function (err, count) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.render("recipes/index", {
+                        recipes: allRecipes,
+                        current: pageNumber,
+                        pages: Math.ceil(count / perPage),
+                        noMatch: noMatch,
+                        search: false
+                    });
+                }
+            });
+        });
+    }
 });
 
 // CREATE - add new recipe to DB
@@ -103,7 +128,7 @@ router.get("/:id", function(req, res) {
     });
 });
 
-// EDIT CAMPGROUND ROUTE
+// EDIT RECIPE ROUTE
 router.get("/:id/edit", middleware.checkRecipeOwnership, function(req, res) {
   Recipe.findById(req.params.id, function(err, foundRecipe) {
     if (err) {
@@ -115,7 +140,7 @@ router.get("/:id/edit", middleware.checkRecipeOwnership, function(req, res) {
   });
 });
 
-// UPDATE CAMPGROUND ROUTE
+// UPDATE RECIPE ROUTE
 router.put(
   "/:id",
   middleware.checkRecipeOwnership,
@@ -139,6 +164,7 @@ router.put(
         }
         recipe.name = req.body.recipe.name;
         recipe.description = req.body.recipe.description;
+        recipe.price = req.body.recipe.price;
         recipe.save();
         req.flash("success", "Successfully Updated!");
         res.redirect("/recipes/" + recipe._id);
@@ -147,7 +173,7 @@ router.put(
   }
 );
 
-// DESTROY CAMPGROUND ROUTE
+// DESTROY RECIPE ROUTE
 router.delete("/:id", middleware.checkRecipeOwnership, function(req, res) {
   Recipe.findById(req.params.id, async function(err, recipe) {
     if (err) {
