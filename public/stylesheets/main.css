@@ -93,13 +93,12 @@ body {
 .delete-form {
     display: inline
 }
-
-/*.loginSignuph1 {
-    text-align: center;
-    color: #1567af;
+.no-comments {
+  color: grey;
 }
-
-.loginSignupContainer {
-    width: 30%;
-    margin: 25px auto;
-}*/
+.own-comment {
+  color: orange;
+}
+.ta {
+  border-color: lightgrey;
+}

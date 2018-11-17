@@ -2,7 +2,7 @@
 <div class="row justify-content-center">
   <div class="col-md-12 text-center"><h1>Create New Recipe</h1></div>
   <div class="col-xs-12 col-md-6 col-lg-4">
-    <form action="/recipes" method="POST" enctype="multipart/form-data">
+    <form id="add-recipe-form" action="/recipes" method="POST" enctype="multipart/form-data">
       <div class="form-group">
         <input
           class="form-control"
@@ -16,12 +16,13 @@
         <input type="file" id="image" name="image" accept="image/*" required />
       </div>
       <div class="form-group">
-        <input
-          class="form-control"
-          type="text"
-          name="recipe[description]"
-          placeholder="description"
-        />
+        <!--<input-->
+        <!--  class="form-control"-->
+        <!--  type="text"-->
+        <!--  name="recipe[description]"-->
+        <!--  placeholder="description"-->
+        <!--/>-->
+        <textarea name='recipe[description]' cols='70' rows='7' class="form-control" placeholder="Write your description..." form="add-recipe-form" wrap='hard'></textarea>
       </div>
       <div class="form-group">
         <!-- <label for="cost">Cost</label> -->
