@@ -2,7 +2,7 @@
     <% if(currentUser && currentUser.isAdmin) { %>
     <h1>Admin User!</h1>
     <% } %>    
-     <div class="jumbotron jumbotronStyle">
+     <div class="jumbotron jumbotron-style">
          <div class="container">
              <h1>Welcome to The Cook Grimoire!</h1>
              <p>Browse thru all the magic shared in our coven!</p>
@@ -25,9 +25,9 @@
             <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                 <div class="card">
                   <img class="card-img-top" src="<%= recipe.image %>" alt="<%= recipe.name %>">
-                  <div class="card-body">
+                  <div class="card-body bg-card-index">
                     <h5 class="card-title"><%= recipe.name %></h5>
-                    <a href="/recipes/<%= recipe._id %>" class="btn btn-primary">More Info</a>
+                    <a href="/recipes/<%= recipe._id %>" class="btn btn-outline-secondary">More Info</a>
                   </div>
                 </div>
             </div>

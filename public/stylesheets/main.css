@@ -2,9 +2,25 @@ html,
 body {
   height: 100%;
 }
-.jumbotronStyle {
+.bg {
+  /* The image used */
+  background-image: url("/assets/photoBody.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-size: 100% 100%;
+}
+.bg-card-index {
+  background-color:lightgrey;
+}
+.bg-card-show {
+  background-color:lightgrey;
+}
+.jumbotron-style {
   background-image: url('/assets/images.jpg');
-  background-size: cover;
+  background-size: 100% 100%;
 }
 /*body {*/
 /*  display: -ms-flexbox;*/
@@ -101,4 +117,19 @@ body {
 }
 .ta {
   border-color: lightgrey;
+  background-color: lightgray;
+}
+.footer-custom {
+  background-color: #2a3035;
+  margin-top: 1em;
+ height: 9em;
+}
+.footer-link-style {
+  color: cyan;
+}
+.copyright-style {
+  color: lightgrey;
+}
+.allButFooter {
+    min-height: calc(100vh - 9em);
 }
