@@ -6,12 +6,13 @@ a {
   color: cyan
 }
 .bg {
+  background-color: #f9b070;
   /* The image used */
-  background-image: url("/assets/photoBody.jpg");
+  /*background-image: url("/assets/photoBody.jpg");*/
   /* Full height */
   /* height: 100%; */
   /* Center and scale the image nicely */
-  background-size: 100% 100%;
+  /*background-size: 100% 100%;*/
   /* display: flex;
   flex-direction: column;
   align-items: center; */
@@ -23,7 +24,7 @@ a {
   background-color:lightgrey;
 }
 .jumbotron-style {
-  background-image: url('/assets/images.jpg');
+  background-image: url('/assets/grimoire1.jpg');
   background-size: 100% 100%;
 }
 /*body {*/
@@ -145,5 +146,5 @@ a {
   flex: 1 1 auto;
 }
 .change-color {
-  color:salmon
+  color: black;
 }
