@@ -2,7 +2,12 @@
 <div class="row justify-content-center">
   <div class="col-md-12 text-center"><h1>Create New Recipe</h1></div>
   <div class="col-xs-12 col-md-6 col-lg-4">
-    <form id="add-recipe-form" action="/recipes" method="POST" enctype="multipart/form-data">
+    <form
+      id="add-recipe-form"
+      action="/recipes"
+      method="POST"
+      enctype="multipart/form-data"
+    >
       <div class="form-group">
         <input
           class="form-control"
@@ -16,13 +21,15 @@
         <input type="file" id="image" name="image" accept="image/*" required />
       </div>
       <div class="form-group">
-        <!--<input-->
-        <!--  class="form-control"-->
-        <!--  type="text"-->
-        <!--  name="recipe[description]"-->
-        <!--  placeholder="description"-->
-        <!--/>-->
-        <textarea name='recipe[description]' cols='70' rows='7' class="form-control" placeholder="Write your description..." form="add-recipe-form" wrap='hard'></textarea>
+        <textarea
+          name="recipe[description]"
+          cols="70"
+          rows="7"
+          class="form-control"
+          placeholder="Write your description..."
+          form="add-recipe-form"
+          wrap="hard"
+        ></textarea>
       </div>
       <div class="form-group">
         <!-- <label for="cost">Cost</label> -->
@@ -30,16 +37,16 @@
           class="form-control"
           type="number"
           name="recipe[price]"
-          placeholder="price"
-          step="0.01"
+          placeholder="cooking time in mins"
+          step="0.5"
           min="0"
         />
       </div>
       <div class="form-group">
-        <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+        <button class="btn btn-lg btn-info btn-block">Submit!</button>
       </div>
     </form>
-    <a href="/recipes" class='btn btn-sm btn-outline-primary'>Go Back</a>
+    <a href="/recipes" class="btn btn-sm btn-info">Go Back</a>
   </div>
 </div>
 <% include ../partials/footer %>
