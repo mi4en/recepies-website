@@ -4,16 +4,16 @@
     <% } %>    
      <div class="jumbotron jumbotron-style">
          <div class="container">
-             <h1 class="change-color">Welcome to The Cook Grimoire!</h1>
-             <p class="change-color">Browse thru all the magic shared in our coven!</p>
+             <h1 class="change-color">The Cook Grimoire</h1>
+             <p class="change-color">Browse thru all the cooking magic, potions and spells shared in our coven!</p>
              <p>
-                <a class="btn btn-dark btn-large" href="/recipes/new">Add New Recipe</a>
+                <a class="btn btn-success btn-large" href="/recipes/new">Add New Recipe</a>
              </p>
              <p>
               <form action="/recipes" method="GET" class="form-inline" id="recipe-search">
                 <div class="form-group">
                   <input type="text" name="search" placeholder="Recipe search..." class="form-control">
-                  <input type="submit" value="Search" class="btn btn-dark">
+                  <input type="submit" value="Search" class="btn btn-success">
                 </div>
               </form>
              </p>
@@ -27,7 +27,7 @@
                   <img class="card-img-top" src="<%= recipe.image %>" alt="<%= recipe.name %>">
                   <div class="card-body bg-card-index">
                     <h5 class="card-title"><%= recipe.name %></h5>
-                    <a href="/recipes/<%= recipe._id %>" class="btn btn-outline-dark">More Info</a>
+                    <a href="/recipes/<%= recipe._id %>" class="btn btn-outline-success">More Info</a>
                   </div>
                 </div>
             </div>

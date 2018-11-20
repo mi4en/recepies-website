@@ -2,29 +2,41 @@ html,
 body {
   height: 100%;
 }
-a {
-  color: cyan
-}
+/*a {*/
+/*  color: cyan*/
+/*}*/
 .bg {
-  background-color: #f9b070;
+  background-color: #ffe1c9;
   /* The image used */
   /*background-image: url("/assets/photoBody.jpg");*/
   /* Full height */
   /* height: 100%; */
   /* Center and scale the image nicely */
   /*background-size: 100% 100%;*/
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
+  /* display: flex;*/
+  /*flex-direction: column;*/
+  /*align-items: center; */
+}
+.btn-success {
+  background-color: #37513b;
+  border-color: #37513b;
+}
+.btn-outline-success:hover {
+  background-color: #37513b;
+  border-color: #37513b;
+}
+.btn-outline-success {
+  color:  #37513b;
+  border-color: #37513b;
 }
 .bg-card-index {
-  background-color:lightgrey;
+  background-color:#ccffe4;
 }
 .bg-card-show {
-  background-color:lightgrey;
+  background-color:#ccffe4;
 }
 .jumbotron-style {
-  background-image: url('/assets/grimoire1.jpg');
+  background-image: url('/assets/cook_like_a_witch_by_toradh-darmazeCropped.png');
   background-size: 100% 100%;
 }
 /*body {*/
@@ -98,19 +110,6 @@ a {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-
-.thumbnail img {
-    width: 100%;
-}
-
-.thumbnail {
-    padding: 0;
-}
-
-.thumbnail .caption-full {
-    padding: 9px;
-}
-
 .delete-form {
     display: inline
 }
@@ -132,19 +131,20 @@ a {
   background-color: #2a3035;
   margin-top: 1em;
   height: 9em;
+  text-align: center;
 }
 .footer-link-style {
-  color: cyan;
+  color: red;
 }
 .copyright-style {
   color: lightgrey;
 }
 .page-link-style {
-  color: cyan;
+  color: black;
 }
 .footer-bot {
   flex: 1 1 auto;
 }
 .change-color {
-  color: black;
+  color: white;
 }
