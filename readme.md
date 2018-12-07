@@ -44,7 +44,7 @@ Each Recipe has:
 
 ##Add Seeds File
 * Add a seeds.js file
-* Run the seeds file every time the server starts
+* Run the seeds file every time the server starts - disabled
 
 ##Add the Comment model!
 * Make our errors go away!
@@ -54,6 +54,7 @@ Each Recipe has:
 * Discuss nested routes
 * Add the comment new and create routes
 * Add the new comment form
+*Change creation to be in-page
 
 ##Style Show Page
 * Add sidebar to show page
@@ -138,10 +139,10 @@ RESTFUL ROUTES
 
 name      url      verb    desc.
 ===============================================
-INDEX   /dogs      GET   Display a list of all dogs
-NEW     /dogs/new  GET   Displays form to make a new dog
-CREATE  /dogs      POST  Add new dog to DB
-SHOW    /dogs/:id  GET   Shows info about one dog
+INDEX   /recipes      GET   Display a list of all dogs
+NEW     /recipes/new  GET   Displays form to make a new dog
+CREATE  /recipes      POST  Add new dog to DB
+SHOW    /recipes/:id  GET   Shows info about one dog
 
 INDEX   /recipes
 NEW     /recipes/new

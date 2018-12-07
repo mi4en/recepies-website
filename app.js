@@ -38,7 +38,7 @@ app.locals.moment = require('moment')
 // PASSPORT CONFIGURATION
 app.use(
   require('express-session')({
-    secret: 'Demon hunter is the best class!',
+    secret: 'very#$%@#%secretive@#%@#$%#@%secret!@$#@%#%@#',
     resave: false,
     saveUninitialized: false
   })
