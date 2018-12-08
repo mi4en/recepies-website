@@ -139,10 +139,10 @@ RESTFUL ROUTES
 
 name      url      verb    desc.
 ===============================================
-INDEX   /recipes      GET   Display a list of all dogs
-NEW     /recipes/new  GET   Displays form to make a new dog
-CREATE  /recipes      POST  Add new dog to DB
-SHOW    /recipes/:id  GET   Shows info about one dog
+INDEX   /recipes      GET   Display a list of all recipes
+NEW     /recipes/new  GET   Displays form to make a new recipe
+CREATE  /recipes      POST  Add new recipe to DB
+SHOW    /recipes/:id  GET   Shows info about one recipe
 
 INDEX   /recipes
 NEW     /recipes/new
